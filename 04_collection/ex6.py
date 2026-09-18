@@ -93,6 +93,14 @@ for word in words :
     count[word] = count.get(word,0) + 1
 print(count)
 
+# 2) dict 컴프리헨션 
+print({word: words.count(word)for word in set(words)})
+
+# 3) Counter: 요소 갯수를 자동으로 세어주는 딕셔너리
+from collections import Counter
+print(Counter(words))
+print(dict(Counter(words)))
+
 # 2️⃣ 60점 이상인 경우 합격 설정하기
 scores = {"국어": 85, "영어": 50, "수학": 95, "과학": 40, "사회": 72}
 
@@ -122,3 +130,6 @@ incoming = {"지우개": 4, "노트": 7, "볼펜": 12}     # 입고 내역
 for item, qty in incoming.items() :
     stock[item] = stock.get(item,0) +qty
 print(stock)
+
+stock.update({item: stock[item]+qty if item in stock else qty for item,qty in incoming.items()})
+stock.update({item:stock.get(item,0)+qty for item,qty in incoming.items()})
